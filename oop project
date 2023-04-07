@@ -1,0 +1,458 @@
+#include <iostream>
+using namespace std;
+
+class Course
+{
+private:
+    string CID;
+    string C_Name;
+    string C_Type;
+
+public:
+    Course() {}
+
+    Course(string C_ID, string cName, string cType)
+    {
+        CID = C_ID;
+        C_Name = cName;
+        C_Type = cType;
+
+
+    }
+
+    void DisplayCourseDetails()
+    {
+
+
+    }
+
+    ~Course() {}
+
+
+};
+
+
+
+class Feedback
+{
+private:
+    string Feedback_Id;
+    string TID;
+    string Feedback_com;
+
+public:
+    Feedback() {}
+
+    Feedback(string fid, string tid, string feed)
+    {
+
+        Feedback_Id = fid;
+        TID = tid;
+        Feedback_com = feed;
+
+
+    }
+
+    void DispalyFeedbackDetails()
+    {
+
+
+
+    }
+
+    ~Feedback() {}
+
+
+
+};
+
+
+class Resource
+{
+private:
+    string RID;
+    string R_Name;
+    string R_Type;
+
+public:
+    Resource() {}
+
+    Resource(string R_ID, string rName, string rType)
+    {
+        RID = R_ID;
+        R_Name = rName;
+        R_Type = rType;
+
+
+    }
+
+    void DisplayResourceDetails()
+    {
+
+
+    }
+
+    ~Resource() {}
+
+
+};
+
+
+
+class Payment
+{
+protected:
+    int receiptNo;
+    string payDate;
+    string type;
+    float C_Fee;
+    float total_Amount;
+
+public:
+    Payment() {}
+
+    Payment(int rNo, float cfee, string pDate, string pType)
+    {
+        receiptNo = rNo;
+        payDate = pDate;
+        type = pType;
+        C_Fee = cfee;
+
+    }
+
+    void displayReceipt()
+    {
+
+
+    }
+
+    void calcTotal()
+    {
+
+
+    }
+
+    ~Payment() {}
+};
+
+
+class Card : public Payment
+{
+private:
+    int Card_No;
+    string Holder_Name;
+    int CVV_No;
+    string EXP_Date;
+
+public:
+
+    Card() {}
+
+    Card(int rNo, float cfee, string pDate, string pType, int C_no, string C_holder, string Exp_D, int Cvv_no) : Payment(rNo, cfee, pDate, pType)
+    {
+        Card_No = C_no;
+        Holder_Name = C_holder;
+        CVV_No = Cvv_no;
+        EXP_Date = Exp_D;
+
+
+    }
+
+    float Calcpayment()
+    {
+        return C_Fee;
+
+    }
+
+    ~Card() {}
+
+
+
+};
+
+
+class Paypal : public Payment
+{
+private:
+    string Paypal_No;
+    string Holder_Name;
+
+
+public:
+    
+    Paypal() {}
+
+    Paypal(int rNo, float cfee, string pDate, string pType,string P_no, string P_holder)
+        :Payment(rNo, cfee, pDate, pType)
+    {
+        Paypal_No = P_no;
+        Holder_Name = P_holder;
+
+    }
+
+    float Calcpayment()
+    {
+        return C_Fee;
+
+    }
+
+    ~Paypal() {}
+    
+
+
+
+};
+
+
+
+
+
+class Guesttrainee
+
+{
+
+protected:
+    string User_Name;
+    string Password;
+    string T_Name;
+    string T_Email;
+    int T_contactno;
+    string T_NIC;
+
+public:
+    Guesttrainee() {}
+
+    Guesttrainee(string u_Name, string Pass, string tName, string tEmail, int tcontact, string tNIC)
+    {
+        User_Name = u_Name;
+        Password = Pass;
+        T_Name = tName;
+        T_Email = tEmail;
+        T_contactno = tcontact;
+        T_NIC = tNIC;
+
+    }
+
+    void displayGuesttrainee()
+    {
+
+
+
+    }
+
+    ~Guesttrainee() {}
+
+
+};
+
+
+
+class RegisteredTrainee : public Guesttrainee
+
+{
+private:
+
+    Payment* pay;
+    Resource* rs[5];
+    Feedback* f[5];
+    Course* c[5];
+    string TID;
+
+public:
+    RegisteredTrainee() {}
+
+    RegisteredTrainee(int rNo, float cfee, string pDate, string pType)
+    {
+
+        pay = new Payment(rNo, cfee, pDate, pType);
+
+
+    }
+
+    void displayDisplayPayment()
+    {
+
+        pay->displayReceipt();
+
+    }
+
+    void addResource(Resource* RS1, Resource* RS2, Resource* RS3, Resource* RS4, Resource* RS5)
+    {
+        rs[0] = RS1;
+        rs[1] = RS2;
+        rs[2] = RS3;
+        rs[3] = RS4;
+        rs[4] = RS5;
+      
+
+    }
+
+    void DisplayResourceDetails()
+    {
+        for (int j = 0; j < 5; j++)
+        {
+            rs[j]->DisplayResourceDetails();
+        }
+
+    }
+
+    void addCourse(Course* C1, Course* C2, Course* C3, Course* C4, Course* C5)
+    {
+        c[0] = C1;
+        c[1] = C2;
+        c[2] = C3;
+        c[3] = C4;
+        c[4] = C5;
+
+    }
+
+    void DisplayCourseDetails()
+    {
+        for (int j = 0; j < 5; j++)
+        {
+            c[j]->DisplayCourseDetails();
+        }
+
+    }
+
+    void addFeedback(Feedback* F1, Feedback* F2, Feedback* F3, Feedback* F4, Feedback* F5)
+    {
+        f[0] = F1;
+        f[1] = F2;
+        f[2] = F3;
+        f[3] = F4;
+        f[4] = F5;
+
+    }
+
+    void  DispalyFeedbackDetails()
+    {
+        for (int j = 0; j < 5; j++)
+        {
+            f[j]->DispalyFeedbackDetails();
+        }
+
+    }
+
+
+    RegisteredTrainee(string T_ID, string u_Name, string Pass, string tName, string tEmail, int tcontact, string tNIC)
+        :Guesttrainee(u_Name, Pass, tName, tEmail, tcontact, tNIC)
+    {
+
+        TID = T_ID;
+
+    }
+
+    void displayRegisteredTrainee()
+    {
+
+    }
+
+    ~RegisteredTrainee() {}
+
+};
+
+
+
+
+class Guestlecturer
+
+{
+
+protected:
+    string User_Name;
+    string Password;
+    string T_Name;
+    string T_Email;
+    int T_contactno;
+    string T_NIC;
+    string Subject;
+
+public:
+    Guestlecturer() {}
+
+    Guestlecturer(string u_Name, string Pass, string tName, string tEmail, int tcontact, string tNIC, string subj)
+    {
+        User_Name = u_Name;
+        Password = Pass;
+        T_Name = tName;
+        T_Email = tEmail;
+        T_contactno = tcontact;
+        T_NIC = tNIC;
+        Subject = subj;
+
+    }
+
+    void displayGuestlecturer()
+    {
+
+
+
+    }
+
+    ~Guestlecturer() {}
+
+
+};
+
+
+
+
+class RegisteredLecturer : public Guestlecturer
+
+{
+private:
+
+    string LID;
+    string CID;
+
+public:
+    RegisteredLecturer() {}
+
+
+    RegisteredLecturer(string L_ID, string C_ID, string u_Name, string Pass, string tName, string tEmail, int tcontact, string tNIC, string subj): Guestlecturer(u_Name, Pass, tName, tEmail, tcontact, tNIC, subj)
+    {
+
+        LID = L_ID;
+        CID = C_ID;
+
+    }
+
+    void displayRegisteredLecturer()
+    {
+
+    }
+
+    ~RegisteredLecturer() {}
+
+};
+
+
+
+int main()
+{
+  Card*cr1;
+  Course*co1;
+  Feedback*f1;
+  Guestlecturer*gl1;
+  Guesttrainee*gt1;
+  Payment*p1;
+  Paypal*pay1;
+  RegisteredLecturer*rl1;
+  RegisteredTrainee*rt1;
+  Resource*re1;
+  
+delete cr1;
+delete co1;
+delete f1;
+delete gl1;
+delete gt1;
+delete rt1;
+delete pay1;
+delete rl1;
+delete re1;
+delete p1;
+
+  return 0;
+
+}
